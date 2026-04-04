@@ -138,38 +138,38 @@ langToggleBtn.addEventListener('click', () => {
 
 
 // ==========================================
-// 2. IP GEOLOCATION API (WITH DEBUGGING)
+// 2. IP GEOLOCATION API (WITH BULLETPROOF FALLBACK)
 // ==========================================
 async function fetchPersonalizedGreeting() {
     const greetingElement = document.getElementById('api-greeting');
     
-    console.log(" API TEST: 1. Starting to fetch location...");
-
     try {
         const response = await fetch('https://ipapi.co/json/');
-        console.log(" API TEST: 2. Got response from server. Status code:", response.status);
-
-        // If the status is 429, you hit the rate limit. If it's 200, we are good.
-        if (!response.ok) {
-            throw new Error(`Server returned status: ${response.status}`);
-        }
-
+        
+        // If the server blocks us (like rate limiting), force an error to trigger the fallback
+        if (!response.ok) throw new Error("API blocked or rate limited");
+        
         const data = await response.json();
-        console.log("🔍 API TEST: 3. Here is the data we got back:", data);
 
+        // If we successfully get the city
         if (data.city) {
             userCity = data.city; 
             greetingElement.innerHTML = `${translations[currentLang]['apiGreeting']} <span style="color: var(--accent);">${userCity}</span>!`;
-            console.log(" API TEST SUCCESS: HTML updated with city:", userCity);
         } else {
-            console.warn(" API TEST WARNING: The API worked, but there was no 'city' in the data.", data);
+            // If the API works but doesn't know the city, force the fallback
+            throw new Error("City not found in data");
         }
     } catch (error) {
-        console.error(" API TEST FAILED: The request was blocked or failed.", error);
-        console.error("This is usually caused by an Adblocker, Brave Browser, a VPN, or a CORS issue.");
+        console.warn("API could not load location (likely an adblocker). Using fallback greeting.");
+        
+        // Show a generic, friendly greeting based on the current language
+        const fallbackText = currentLang === 'en' 
+            ? "👋 Welcome to my digital space!" 
+            : "👋 Chào mừng bạn đến với portfolio của tôi!";
+            
+        greetingElement.innerHTML = fallbackText;
     }
 }
-
 
 // ==========================================
 // 3. PERSISTENT THEME TOGGLE
