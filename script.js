@@ -138,20 +138,35 @@ langToggleBtn.addEventListener('click', () => {
 
 
 // ==========================================
-// 2. IP GEOLOCATION API
+// 2. IP GEOLOCATION API (WITH DEBUGGING)
 // ==========================================
 async function fetchPersonalizedGreeting() {
     const greetingElement = document.getElementById('api-greeting');
+    
+    console.log(" API TEST: 1. Starting to fetch location...");
+
     try {
         const response = await fetch('https://ipapi.co/json/');
+        console.log(" API TEST: 2. Got response from server. Status code:", response.status);
+
+        // If the status is 429, you hit the rate limit. If it's 200, we are good.
+        if (!response.ok) {
+            throw new Error(`Server returned status: ${response.status}`);
+        }
+
         const data = await response.json();
+        console.log("🔍 API TEST: 3. Here is the data we got back:", data);
 
         if (data.city) {
-            userCity = data.city; // Save it so the language toggle can use it
+            userCity = data.city; 
             greetingElement.innerHTML = `${translations[currentLang]['apiGreeting']} <span style="color: var(--accent);">${userCity}</span>!`;
+            console.log(" API TEST SUCCESS: HTML updated with city:", userCity);
+        } else {
+            console.warn(" API TEST WARNING: The API worked, but there was no 'city' in the data.", data);
         }
     } catch (error) {
-        console.error("Error fetching location data:", error);
+        console.error(" API TEST FAILED: The request was blocked or failed.", error);
+        console.error("This is usually caused by an Adblocker, Brave Browser, a VPN, or a CORS issue.");
     }
 }
 
