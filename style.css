@@ -13,6 +13,10 @@
     --text: #24292f;
     --text-bright: #1f2328;
 }
+[data-theme="light"] .navbar {
+    background: rgba(255, 255, 255, 0.85); 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
 
 /* Added Smooth Scrolling */
 html {
@@ -738,5 +742,72 @@ a:focus-visible, button:focus-visible {
         position: static;
         transform: none;
         margin-top: 20px;
+    }
+}
+/* Add this to make the Contact button pulse softly */
+@keyframes softPulse {
+    0% { box-shadow: 0 0 0 0 rgba(88, 166, 255, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(88, 166, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(88, 166, 255, 0); }
+}
+
+.hero-btns a[href^="mailto:"] {
+    animation: softPulse 2.5s infinite;
+}
+
+/* ==========================================
+   CONTACT FORM STYLING
+   ========================================== */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+/* Ensure the Name and Email fields take up equal space */
+.contact-form > div {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.form-input {
+    width: 100%;
+    flex: 1; /* Makes inputs share the row equally */
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.05); /* Premium glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-bright);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Prevents padding from breaking width */
+}
+
+/* Light mode adaptation */
+[data-theme="light"] .form-input {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.form-input::placeholder {
+    color: var(--text);
+    opacity: 0.6;
+}
+
+/* Focus state: When the user clicks to type */
+.form-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 4px rgba(88, 166, 255, 0.15); /* Soft glowing aura */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .contact-form > div {
+        flex-direction: column; /* Stack Name and Email vertically on phones */
+        gap: 20px;
     }
 }
