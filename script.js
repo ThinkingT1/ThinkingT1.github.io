@@ -29,6 +29,9 @@ const translations = {
         skillEcomText: "Website Architecture, Social Commerce, Marketing Strategy",
         skillSoft: "Soft Skills",
         skillSoftText: "Team Collaboration, Decision-Making",
+        currencyTitle: "<i class=\"fas fa-exchange-alt\"></i> Live Currency Converter",
+        currencyDesc: "A real-time E-Commerce utility fetching live exchange rates via API.",
+        convertBtn: "Convert",
         certTitle: "Certifications",
         certEng: "English Proficiency",
         certJap: "Japanese Proficiency",
@@ -48,7 +51,14 @@ const translations = {
         jobTask3Tag: "Content Strategy:",
         jobTask3Text: "Executed a short-form video strategy (60+ assets) on TikTok for ads to increase brand recognition and engagement.",
         footerText: "Built with HTML, CSS & JS.",
-        apiGreeting: "👋 Hello visitor from "
+        apiGreeting: "👋 Hello visitor from ", 
+        contactSectionTitle: "Get In Touch",
+        contactSectionDesc: "Whether you have a question, a project proposal, or just want to say hi, I'll try my best to get back to you!",
+        formName: "Your Name",
+        formEmail: "Your Email Address",
+        formMessage: "How can I help you?",
+        formSubmit: "Send Message",
+        analyticsTitle: "Live Portfolio Analytics",
     },
     vn: {
         subtitle: "Chuyên viên Thương mại Điện tử & Digital Marketing",
@@ -77,6 +87,9 @@ const translations = {
         skillEcomText: "Kiến trúc Website, Social Commerce, Chiến lược Marketing",
         skillSoft: "Kỹ năng Mềm",
         skillSoftText: "Làm việc Nhóm, Ra quyết định dựa trên dữ liệu",
+        currencyTitle: "<i class=\"fas fa-exchange-alt\"></i> Chuyển đổi Tiền tệ Trực tiếp",
+        currencyDesc: "Tiện ích Thương mại Điện tử xử lý tỷ giá hối đoái theo thời gian thực qua API.",
+        convertBtn: "Chuyển đổi",
         certTitle: "Chứng chỉ",
         certEng: "Năng lực Tiếng Anh",
         certJap: "Năng lực Tiếng Nhật",
@@ -96,13 +109,20 @@ const translations = {
         jobTask3Tag: "Chiến lược Nội dung:",
         jobTask3Text: "Triển khai chiến lược video dạng ngắn (hơn 60 video) trên TikTok để chạy quảng cáo, giúp tăng độ nhận diện thương hiệu và tương tác.",
         footerText: "Được xây dựng bằng HTML, CSS & JS.",
-        apiGreeting: "👋 Chào người bạn đến từ "
+        apiGreeting: "👋 Chào người bạn đến từ ",
+        contactSectionTitle: "Liên Hệ",
+        contactSectionDesc: "Dù bạn có câu hỏi, đề xuất dự án hay chỉ muốn kết nối, mình sẽ cố gắng phản hồi bạn sớm nhất có thể!",
+        formName: "Tên của bạn",
+        formEmail: "Địa chỉ Email",
+        formMessage: "Mình có thể giúp gì cho bạn?",
+        formSubmit: "Gửi Tin Nhắn",
+        analyticsTitle: "Phân tích Dữ liệu Trực tiếp",
     }
 };
 
 const langToggleBtn = document.getElementById('lang-toggle');
 let currentLang = localStorage.getItem('lang') || 'en';
-let userCity = ""; // Store the API city globally so we can translate the greeting
+let userCity = ""; // Store the API city globally 
 
 function setLanguage(lang) {
     langToggleBtn.innerText = lang === 'en' ? 'VN' : 'EN';
@@ -110,21 +130,17 @@ function setLanguage(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[lang][key]) {
-            el.innerHTML = translations[lang][key]; // Changed to innerHTML to preserve bold tags
+            el.innerHTML = translations[lang][key]; // Must be innerHTML to render HTML icons inside strings
         }
     });
 
-    // Update Typewriter
     subtitleText = translations[lang]['subtitle'];
     const typewriterElement = document.getElementById('typewriter');
-    
-    // If it's already done typing, just swap the text instantly
     if (typeIndex >= subtitleText.length || typeIndex === 0) {
          typewriterElement.innerHTML = subtitleText;
          typeIndex = subtitleText.length;
     }
 
-    // Update API Greeting if we have the city data
     if (userCity !== "") {
         document.getElementById('api-greeting').innerHTML = `${translations[lang]['apiGreeting']} <span style="color: var(--accent);">${userCity}</span>!`;
     }
@@ -134,49 +150,86 @@ langToggleBtn.addEventListener('click', () => {
     currentLang = currentLang === 'en' ? 'vn' : 'en';
     localStorage.setItem('lang', currentLang);
     setLanguage(currentLang);
+    
+    // Clear currency result on language switch to prevent mixed languages
+    document.getElementById('currency-result').innerHTML = "---";
 });
 
+// ==========================================
+// 2. LIVE CURRENCY CONVERTER API
+// ==========================================
+const convertBtn = document.getElementById('convert-btn');
+const amountInput = document.getElementById('currency-amount');
+const baseSelect = document.getElementById('currency-base');
+const targetSelect = document.getElementById('currency-target');
+const resultDisplay = document.getElementById('currency-result');
+
+async function convertCurrency() {
+    const amount = amountInput.value;
+    const base = baseSelect.value;
+    const target = targetSelect.value;
+
+    // Validation
+    if (amount === '' || amount <= 0) {
+        resultDisplay.innerHTML = currentLang === 'en' ? "Please enter a valid amount." : "Vui lòng nhập số tiền hợp lệ.";
+        return;
+    }
+
+    // Show Loading state
+    resultDisplay.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; 
+
+    try {
+        const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${base}`);
+        if (!response.ok) throw new Error("API failed");
+        
+        const data = await response.json();
+        const rate = data.rates[target];
+        const convertedAmount = (amount * rate).toFixed(2);
+
+        // Format numbers beautifully (e.g. 1,000,000)
+        const locale = currentLang === 'en' ? 'en-US' : 'vi-VN';
+        const formattedAmount = new Intl.NumberFormat(locale).format(amount);
+        const formattedResult = new Intl.NumberFormat(locale).format(convertedAmount);
+
+        resultDisplay.innerHTML = `${formattedAmount} ${base} = <span style="color: var(--accent);">${formattedResult} ${target}</span>`;
+    } catch (error) {
+        console.error("Currency API Error:", error);
+        resultDisplay.innerHTML = currentLang === 'en' ? "Error fetching rates. Please try again." : "Lỗi tải tỷ giá. Vui lòng thử lại.";
+    }
+}
+
+convertBtn.addEventListener('click', convertCurrency);
 
 // ==========================================
-// 2. IP GEOLOCATION API (WITH BULLETPROOF FALLBACK)
+// 3. IP GEOLOCATION API (GEOJS)
 // ==========================================
 async function fetchPersonalizedGreeting() {
     const greetingElement = document.getElementById('api-greeting');
-    
     try {
-        const response = await fetch('https://ipapi.co/json/');
-        
-        // If the server blocks us (like rate limiting), force an error to trigger the fallback
-        if (!response.ok) throw new Error("API blocked or rate limited");
-        
+        const response = await fetch('https://get.geojs.io/v1/ip/geo.json');
+        if (!response.ok) throw new Error("API request failed");
         const data = await response.json();
 
-        // If we successfully get the city
         if (data.city) {
             userCity = data.city; 
             greetingElement.innerHTML = `${translations[currentLang]['apiGreeting']} <span style="color: var(--accent);">${userCity}</span>!`;
         } else {
-            // If the API works but doesn't know the city, force the fallback
             throw new Error("City not found in data");
         }
     } catch (error) {
-        console.warn("API could not load location (likely an adblocker). Using fallback greeting.");
-        
-        // Show a generic, friendly greeting based on the current language
+        console.warn("Location API blocked. Using fallback.");
         const fallbackText = currentLang === 'en' 
             ? "👋 Welcome to my digital space!" 
             : "👋 Chào mừng bạn đến với portfolio của tôi!";
-            
         greetingElement.innerHTML = fallbackText;
     }
 }
 
 // ==========================================
-// 3. PERSISTENT THEME TOGGLE
+// 4. PERSISTENT THEME TOGGLE
 // ==========================================
 const themeToggle = document.getElementById('theme-toggle');
 const htmlElement = document.documentElement;
-
 const savedTheme = localStorage.getItem('theme') || 'dark';
 htmlElement.setAttribute('data-theme', savedTheme);
 updateToggleIcon(savedTheme);
@@ -184,30 +237,24 @@ updateToggleIcon(savedTheme);
 themeToggle.addEventListener('click', () => {
     const currentTheme = htmlElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
     htmlElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateToggleIcon(newTheme);
 });
 
 function updateToggleIcon(theme) {
-    themeToggle.innerHTML = theme === 'dark' ? 
-        '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+    themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
 }
 
-
 // ==========================================
-// 4. BILINGUAL TYPEWRITER EFFECT
+// 5. BILINGUAL TYPEWRITER EFFECT
 // ==========================================
-let subtitleText = ""; // Will be set by setLanguage
+let subtitleText = ""; 
 const typewriterElement = document.getElementById('typewriter');
 let typeIndex = 0;
 
 function typeWriter() {
-    if (typeIndex === 0) {
-        typewriterElement.innerHTML = ''; 
-    }
-    
+    if (typeIndex === 0) typewriterElement.innerHTML = ''; 
     if (typeIndex < subtitleText.length) {
         typewriterElement.innerHTML += subtitleText.charAt(typeIndex);
         typeIndex++;
@@ -215,9 +262,8 @@ function typeWriter() {
     }
 }
 
-
 // ==========================================
-// 5. PERFORMANT SCROLL & BACK TO TOP
+// 6. SCROLL PROGRESS & BACK TO TOP
 // ==========================================
 let ticking = false;
 const backToTopBtn = document.querySelector('.back-to-top');
@@ -225,13 +271,11 @@ const backToTopBtn = document.querySelector('.back-to-top');
 window.addEventListener('scroll', () => {
     if (!ticking) {
         window.requestAnimationFrame(() => {
-            // Progress Bar
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             document.getElementById("scroll-progress").style.width = scrolled + "%";
             
-            // Back to Top logic
             if (backToTopBtn) {
                 if (window.scrollY > 300) {
                     backToTopBtn.style.opacity = '1';
@@ -247,16 +291,10 @@ window.addEventListener('scroll', () => {
     }
 });
 
-
 // ==========================================
-// 6. SCROLL REVEAL OBSERVER
+// 7. SCROLL REVEAL OBSERVER
 // ==========================================
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.15 
-};
-
+const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
 const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -265,51 +303,33 @@ const observer = new IntersectionObserver((entries, observer) => {
         }
     });
 }, observerOptions);
-
-document.querySelectorAll('.reveal').forEach(el => {
-    observer.observe(el);
-});
-
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ==========================================
-// 7. LIGHTBOX LOGIC
+// 8. LIGHTBOX LOGIC
 // ==========================================
 function openLightbox(src) {
     const modal = document.getElementById("certModal");
-    const modalImg = document.getElementById("fullCertImage");
     modal.style.display = "block";
-    modalImg.src = src;
+    document.getElementById("fullCertImage").src = src;
     document.body.style.overflow = "hidden";
 }
-
 function closeLightbox() {
     const modal = document.getElementById("certModal");
     modal.style.display = "none";
     document.body.style.overflow = "auto";
 }
-
-document.addEventListener('keydown', function(event) {
-    if (event.key === "Escape") closeLightbox();
-});
-
-document.getElementById('certModal').addEventListener('click', function(event) {
-    if (event.target === this) closeLightbox();
-});
-
+document.addEventListener('keydown', (e) => { if (e.key === "Escape") closeLightbox(); });
+document.getElementById('certModal').addEventListener('click', function(e) { if (e.target === this) closeLightbox(); });
 
 // ==========================================
-// 8. CUSTOM PROJECT SLIDER (AUTOPLAY)
+// 9. PROJECT SLIDER
 // ==========================================
 const track = document.getElementById('project-slider');
 const slides = Array.from(track.children);
-const nextButton = document.getElementById('slider-next');
-const prevButton = document.getElementById('slider-prev');
 const dotsContainer = document.getElementById('slider-dots');
+let slideCurrent = 0; let slideTimer; 
 
-let currentSlide = 0;
-let slideInterval; 
-
-// Create dots
 slides.forEach((_, index) => {
     const dot = document.createElement('div');
     dot.classList.add('dot');
@@ -317,48 +337,38 @@ slides.forEach((_, index) => {
     dot.dataset.index = index;
     dotsContainer.appendChild(dot);
 });
+const dotsList = Array.from(dotsContainer.children);
 
-const dots = Array.from(dotsContainer.children);
-
-function updateSlider() {
-    track.style.transform = `translateX(-${currentSlide * 100}%)`;
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[currentSlide].classList.add('active');
+function updateProjSlider() {
+    track.style.transform = `translateX(-${slideCurrent * 100}%)`;
+    dotsList.forEach(dot => dot.classList.remove('active'));
+    dotsList[slideCurrent].classList.add('active');
 }
 
-function startSlideShow() {
-    slideInterval = setInterval(() => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        updateSlider();
+function startSlider() {
+    slideTimer = setInterval(() => {
+        slideCurrent = (slideCurrent + 1) % slides.length;
+        updateProjSlider();
     }, 4500); 
 }
+function stopSlider() { clearInterval(slideTimer); }
 
-function stopSlideShow() {
-    clearInterval(slideInterval);
-}
-
-nextButton.addEventListener('click', () => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    updateSlider();
-    stopSlideShow(); startSlideShow();
+document.getElementById('slider-next').addEventListener('click', () => {
+    slideCurrent = (slideCurrent + 1) % slides.length;
+    updateProjSlider(); stopSlider(); startSlider();
 });
-
-prevButton.addEventListener('click', () => {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    updateSlider();
-    stopSlideShow(); startSlideShow();
+document.getElementById('slider-prev').addEventListener('click', () => {
+    slideCurrent = (slideCurrent - 1 + slides.length) % slides.length;
+    updateProjSlider(); stopSlider(); startSlider();
 });
-
-dots.forEach(dot => {
+dotsList.forEach(dot => {
     dot.addEventListener('click', (e) => {
-        currentSlide = parseInt(e.target.dataset.index);
-        updateSlider();
-        stopSlideShow(); startSlideShow();
+        slideCurrent = parseInt(e.target.dataset.index);
+        updateProjSlider(); stopSlider(); startSlider();
     });
 });
-
-track.addEventListener('mouseenter', stopSlideShow);
-track.addEventListener('mouseleave', startSlideShow);
+track.addEventListener('mouseenter', stopSlider);
+track.addEventListener('mouseleave', startSlider);
 
 // ==========================================
 // INITIALIZATION ON LOAD
@@ -366,6 +376,7 @@ track.addEventListener('mouseleave', startSlideShow);
 document.addEventListener('DOMContentLoaded', () => {
     setLanguage(currentLang);
     fetchPersonalizedGreeting();
-    startSlideShow();
-    setTimeout(typeWriter, 500); // Start typewriter after a short delay
+    startSlider();
+    setTimeout(typeWriter, 500); 
 });
+
