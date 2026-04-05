@@ -43,7 +43,7 @@
                 <div class="hero-btns">
                     <a href="https://github.com/ThinkingT1" target="_blank" class="btn primary-btn"><i class="fab fa-github"></i> GitHub</a>
                     <a href="DINH-GIA-THINH_CV.pdf" target="_blank" class="btn secondary-btn"><i class="fas fa-file-download"></i> <span data-i18n="downloadCv">Download CV</span></a>
-                    <a href="mailto:giathinhwork3@gmail.com" class="btn secondary-btn" data-i18n="contactMe">Contact Me</a>
+                    <a href="#contact" class="btn secondary-btn" data-i18n="contactMe">Contact Me</a>
                 </div>
             </div>
         </div>
@@ -155,7 +155,38 @@
                     <p data-i18n="skillSoftText">Team Collaboration, Decision-Making</p>
                 </div>
             </div>
-        </div>
+
+            <div style="margin-top: 40px; padding: 25px; background: rgba(88, 166, 255, 0.05); border: 1px solid rgba(88, 166, 255, 0.2); border-radius: 12px;">
+                <h3 data-i18n="currencyTitle" style="margin-top: 0; color: var(--accent);"><i class="fas fa-exchange-alt"></i> Live Currency Converter</h3>
+                <p data-i18n="currencyDesc" style="font-size: 0.95rem; opacity: 0.8; margin-bottom: 20px;">A real-time E-Commerce utility fetching live exchange rates via API.</p>
+                
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                    <input type="number" id="currency-amount" value="1" min="1" style="width: 80px; padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: var(--bg); color: var(--text); font-size: 1rem; outline: none;">
+                    
+                    <select id="currency-base" style="padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: var(--bg); color: var(--text); font-size: 1rem; outline: none; cursor: pointer;">
+                        <option value="USD">USD ($)</option>
+                        <option value="EUR">EUR (€)</option>
+                        <option value="JPY">JPY (¥)</option>
+                        <option value="AUD">AUD ($)</option>
+                    </select>
+                    
+                    <span style="font-weight: bold; color: var(--accent);">to</span>
+                    
+                    <select id="currency-target" style="padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: var(--bg); color: var(--text); font-size: 1rem; outline: none; cursor: pointer;">
+                        <option value="VND" selected>VND (₫)</option>
+                        <option value="USD">USD ($)</option>
+                        <option value="EUR">EUR (€)</option>
+                        <option value="JPY">JPY (¥)</option>
+                    </select>
+                    
+                    <button id="convert-btn" class="btn primary-btn" style="margin: 0; padding: 10px 20px;" data-i18n="convertBtn">Convert</button>
+                </div>
+                
+                <div style="margin-top: 20px; font-size: 1.5rem; font-weight: bold; color: var(--text-bright);">
+                    <span id="currency-result">---</span>
+                </div>
+            </div>
+            </div>
     </section>
     <section class="section reveal">
         <div class="content-box">
@@ -253,6 +284,39 @@
             </div>
         </div>
     </section>
+
+<section class="section reveal" id="contact">
+        <div class="content-box" style="text-align: center; max-width: 700px; margin: 0 auto;">
+            <h2 class="section-title" data-i18n="contactSectionTitle" style="border-bottom: none; margin-bottom: 10px;">Get In Touch</h2>
+            <p data-i18n="contactSectionDesc" style="color: var(--text); opacity: 0.9; margin-bottom: 30px;">
+                Whether you have a question, a project proposal, or just want to say hi, I'll try my best to get back to you!
+            </p>
+            
+            <form action="https://formspree.io/f/xykbblpy" method="POST" class="contact-form">
+                <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                    <input type="text" name="name" required class="form-input" placeholder="Your Name" data-i18n-placeholder="formName">
+                    <input type="email" name="email" required class="form-input" placeholder="Your Email Address" data-i18n-placeholder="formEmail">
+                </div>
+                <textarea name="message" rows="5" required class="form-input" placeholder="How can I help you?" data-i18n-placeholder="formMessage" style="margin-bottom: 20px; resize: vertical;"></textarea>
+                <button type="submit" class="btn primary-btn" style="width: 100%; padding: 15px; font-size: 1.1rem;" data-i18n="formSubmit">
+                    Send Message <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+<section class="section reveal" id="analytics">
+    <div class="content-box">
+        <h2 class="section-title" data-i18n="analyticsTitle">Live Portfolio Analytics</h2>
+        <p style="color: var(--text); opacity: 0.9; margin-bottom: 20px;">
+            Transparency is key in data-driven marketing. Here is the live, real-time traffic data for this exact portfolio, pulled securely from GA4 via Looker Studio.
+        </p>
+        
+        <div style="width: 100%; height: 450px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+            <iframe width="100%" height="100%" src="https://lookerstudio.google.com/embed/reporting/2c5acde8-3e65-4a7a-9176-c14a27e3525d/page/p_default" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
 <footer class="footer">
         <div class="footer-content">
             <div class="social-links">
@@ -262,6 +326,10 @@
             <p>&copy; 2026 Dinh Gia Thinh. <span data-i18n="footerText">Built with HTML, CSS & JS.</span></p>
             <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
         </div>
+        <div style="text-align: center; margin-top: 20px;">
+    <p style="color: var(--text); font-size: 0.9rem;">Total Portfolio Views 👀</p>
+    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fthinkingt1.github.io&count_bg=%2358A6FF&title_bg=%23161B22&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=true" alt="Hits">
+</div>
     </footer>
     <script src="script.js"></script>
 </body>
