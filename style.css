@@ -829,29 +829,31 @@ a:focus-visible, button:focus-visible {
 .glow-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(90px); /* This creates the smooth, dispersed light effect */
-    opacity: 0.6;
-    animation: floatGlow 15s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+    filter: blur(80px); /* Slightly dropping the blur radius from 90px to 80px helps immensely */
+    opacity: 0.5;
+    will-change: transform; /* Prepares the GPU for smooth animations */
+    transform: translate3d(0, 0, 0); /* Forces hardware acceleration */
+    animation: floatGlow 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Cyan / Blue Orb */
 .orb-1 {
     width: 60vw;
     height: 60vw;
-    background: radial-gradient(circle, rgba(88, 166, 255, 0.4) 0%, rgba(88, 166, 255, 0) 70%);
+    background: radial-gradient(circle, rgba(88, 166, 255, 0.3) 0%, rgba(88, 166, 255, 0) 70%);
     top: -10%;
     left: -10%;
-    animation-duration: 20s;
+    animation-duration: 30s; /* Increased from 20s */
 }
 
 /* Purple / Magenta Orb */
 .orb-2 {
     width: 50vw;
     height: 50vw;
-    background: radial-gradient(circle, rgba(162, 88, 255, 0.35) 0%, rgba(162, 88, 255, 0) 70%);
+    background: radial-gradient(circle, rgba(162, 88, 255, 0.25) 0%, rgba(162, 88, 255, 0) 70%);
     bottom: -10%;
     right: -10%;
-    animation-duration: 25s;
+    animation-duration: 35s; /* Increased from 25s */
     animation-delay: -5s;
 }
 
@@ -859,25 +861,25 @@ a:focus-visible, button:focus-visible {
 .orb-3 {
     width: 40vw;
     height: 40vw;
-    background: radial-gradient(circle, rgba(255, 88, 166, 0.25) 0%, rgba(255, 88, 166, 0) 70%);
+    background: radial-gradient(circle, rgba(255, 88, 166, 0.2) 0%, rgba(255, 88, 166, 0) 70%);
     top: 40%;
     left: 40%;
-    animation-duration: 22s;
+    animation-duration: 32s; /* Increased from 22s */
     animation-delay: -10s;
 }
 
 /* The movement animation */
 @keyframes floatGlow {
     0% {
-        transform: translate(0, 0) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
     }
     33% {
-        transform: translate(5vw, 10vh) scale(1.1);
+        transform: translate3d(8%, 12%, 0) scale(1.08);
     }
     66% {
-        transform: translate(-10vw, 5vh) scale(0.9);
+        transform: translate3d(-10%, 6%, 0) scale(0.95);
     }
     100% {
-        transform: translate(8vw, -8vh) scale(1.05);
+        transform: translate3d(5%, -5%, 0) scale(1.02);
     }
 }
