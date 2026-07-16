@@ -836,36 +836,71 @@ a:focus-visible, button:focus-visible {
     animation: floatGlow 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Cyan / Blue Orb */
+/* Cyan / Blue Orb (Existing) */
 .orb-1 {
     width: 60vw;
     height: 60vw;
     background: radial-gradient(circle, rgba(88, 166, 255, 0.3) 0%, rgba(88, 166, 255, 0) 70%);
     top: -10%;
     left: -10%;
-    animation-duration: 30s; /* Increased from 20s */
+    animation-duration: 30s; 
 }
 
-/* Purple / Magenta Orb */
+/* Purple / Magenta Orb (Existing) */
 .orb-2 {
     width: 50vw;
     height: 50vw;
     background: radial-gradient(circle, rgba(162, 88, 255, 0.25) 0%, rgba(162, 88, 255, 0) 70%);
     bottom: -10%;
     right: -10%;
-    animation-duration: 35s; /* Increased from 25s */
+    animation-duration: 35s; 
     animation-delay: -5s;
 }
 
-/* Deep Pink / Accent Orb */
+/* Deep Pink / Accent Orb (Existing) */
 .orb-3 {
     width: 40vw;
     height: 40vw;
     background: radial-gradient(circle, rgba(255, 88, 166, 0.2) 0%, rgba(255, 88, 166, 0) 70%);
     top: 40%;
     left: 40%;
-    animation-duration: 32s; /* Increased from 22s */
+    animation-duration: 32s; 
     animation-delay: -10s;
+}
+
+/* --- NEW ORBS BELOW --- */
+
+/* Mint / Teal Orb */
+.orb-4 {
+    width: 45vw;
+    height: 45vw;
+    background: radial-gradient(circle, rgba(0, 255, 170, 0.2) 0%, rgba(0, 255, 170, 0) 70%);
+    top: 20%;
+    right: 15%;
+    animation-duration: 38s;
+    animation-delay: -15s;
+}
+
+/* Amber / Gold Orb (Warmth) */
+.orb-5 {
+    width: 55vw;
+    height: 55vw;
+    background: radial-gradient(circle, rgba(255, 170, 0, 0.15) 0%, rgba(255, 170, 0, 0) 70%);
+    bottom: 20%;
+    left: 10%;
+    animation-duration: 40s;
+    animation-delay: -22s;
+}
+
+/* Deep Indigo Orb */
+.orb-6 {
+    width: 65vw;
+    height: 65vw;
+    background: radial-gradient(circle, rgba(88, 0, 255, 0.2) 0%, rgba(88, 0, 255, 0) 70%);
+    top: -5%;
+    left: 30%;
+    animation-duration: 42s;
+    animation-delay: -8s;
 }
 
 /* The movement animation */
