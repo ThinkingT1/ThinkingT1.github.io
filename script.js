@@ -42,6 +42,12 @@ const translations = {
         proj2Text: "Created and managed TikTok content for social commerce, analyzing the performance of each video and optimizing content strategy based on data insights and user engagement.",
         proj3Title: "E-Commerce Mobile App",
         proj3Text: "Developed a cross-platform mobile application with full e-commerce functionality. Implemented features like product browsing, state management, shopping cart, and secure user authentication.",
+        proj4Title: "Custom Music Streaming Web",
+        proj4Text: "Developed a responsive web-based music player and server. Integrated Cloudflare R2 for media storage, Appwrite for secure backend data fetching, and the iTunes API for dynamic album artwork retrieval.",
+        proj5Title: "Terminal Chess (Multiplayer)",
+        proj5Text: "Engineered a real-time multiplayer chess platform with a terminal-themed UI. Leveraged Appwrite for live game state synchronization and matchmaking, alongside chess.js for robust move validation and custom HUD tracking.",
+        musicWebTitle: "Experience My Music Web App",
+        musicWebDesc: "Want to see my code in action? Check out my custom-built music streaming platform powered by Cloudflare R2, Appwrite, and the iTunes API.",
         expTitle: "Working Experience",
         jobTitle: "Technical Marketing & Web Operations Lead (Intern)",
         jobTask1Tag: "System Administration:",
@@ -50,6 +56,15 @@ const translations = {
         jobTask2Text: "Engineered site structures and server-side caching to ensure optimal load speeds and search visibility.",
         jobTask3Tag: "Content Strategy:",
         jobTask3Text: "Executed a short-form video strategy (60+ assets) on TikTok for ads to increase brand recognition and engagement.",
+        job2Title: "Customer Service Advisor (Expedia Flights & Activities)",
+        job2Task1Tag: "Tech Stack:",
+        job2Task1Text: "Amadeus GDS, Expedia CRM, Omnichannel Support Platforms, Proprietary Knowledge Bases.",
+        job2Task2Tag: "Flight Operations & Logistics:",
+        job2Task2Text: "Navigated the Amadeus GDS and Expedia systems to execute precise flight ticketing, manage dynamic vendor inventory, and rapidly resolve high-stress international travel disruptions (IRROPS).",
+        job2Task3Tag: "Performance & SLA Management:",
+        job2Task3Text: "Consistently achieved strict BPO performance metrics including CSAT, First Contact Resolution (FCR), and Average Handle Time (AHT) while maintaining meticulous policy adherence to prevent airline financial penalties (ADMs).",
+        job2Task4Tag: "Consumer Behavior & CRM:",
+        job2Task4Text: "Acted as a frontline mediator for global travel disputes, observing real-time customer friction points in the digital booking journey to analyze digital trust, user experience (UX), and platform abandonment.",
         footerText: "Built with HTML, CSS & JS.",
         apiGreeting: "👋 Hello visitor from ", 
         contactSectionTitle: "Get In Touch",
@@ -100,6 +115,12 @@ const translations = {
         proj2Text: "Sáng tạo và quản lý nội dung TikTok cho dự án Social Commerce, phân tích hiệu suất của từng video và tối ưu hóa chiến lược nội dung dựa trên dữ liệu (data insights) và mức độ tương tác của người dùng.",
         proj3Title: "Ứng dụng E-Commerce Di động",
         proj3Text: "Phát triển ứng dụng di động đa nền tảng với đầy đủ tính năng thương mại điện tử. Triển khai các tính năng như tìm kiếm sản phẩm, quản lý trạng thái, giỏ hàng và xác thực người dùng bảo mật.",
+        proj4Title: "Website Nghe Nhạc Trực Tuyến",
+        proj4Text: "Phát triển trình phát nhạc và máy chủ web tương thích đa nền tảng. Tích hợp Cloudflare R2 để lưu trữ, Appwrite để quản lý backend bảo mật, và iTunes API để truy xuất ảnh bìa album động.",
+        proj5Title: "Cờ Vua Giao Diện Terminal (Đa người chơi)",
+        proj5Text: "Xây dựng nền tảng cờ vua đa người chơi thời gian thực với giao diện phong cách terminal. Ứng dụng Appwrite để đồng bộ trạng thái và ghép trận, kết hợp cùng chess.js để xác thực nước đi.",
+        musicWebTitle: "Trải Nghiệm Ứng Dụng Nghe Nhạc",
+        musicWebDesc: "Bạn muốn xem code hoạt động thực tế? Hãy trải nghiệm nền tảng nghe nhạc trực tuyến do tôi tự xây dựng, được vận hành bởi Cloudflare R2, Appwrite và iTunes API.",
         expTitle: "Kinh nghiệm Làm việc",
         jobTitle: "Trưởng nhóm Technical Marketing & Vận hành Web (Thực tập sinh)",
         jobTask1Tag: "Quản trị Hệ thống:",
@@ -108,6 +129,15 @@ const translations = {
         jobTask2Text: "Thiết lập cấu trúc trang web và bộ nhớ đệm (caching) phía máy chủ để đảm bảo tốc độ tải trang và khả năng hiển thị trên công cụ tìm kiếm đạt mức tối ưu.",
         jobTask3Tag: "Chiến lược Nội dung:",
         jobTask3Text: "Triển khai chiến lược video dạng ngắn (hơn 60 video) trên TikTok để chạy quảng cáo, giúp tăng độ nhận diện thương hiệu và tương tác.",
+        job2Title: "Chuyên viên Chăm sóc Khách hàng (Expedia Flights & Activities)",
+        job2Task1Tag: "Công nghệ sử dụng:",
+        job2Task1Text: "Hệ thống Amadeus GDS, CRM của Expedia, Nền tảng Hỗ trợ Đa kênh, Cơ sở Kiến thức Nội bộ.",
+        job2Task2Tag: "Vận hành Chuyến bay & Logistics:",
+        job2Task2Text: "Thao tác trên Amadeus GDS và hệ thống Expedia để xuất vé máy bay chính xác, quản lý kho hàng đối tác và giải quyết nhanh chóng các sự cố hàng không quốc tế (IRROPS).",
+        job2Task3Tag: "Quản lý Hiệu suất & SLA:",
+        job2Task3Text: "Liên tục đạt các chỉ số hiệu suất BPO nghiêm ngặt (CSAT, FCR, AHT), đồng thời tuân thủ chính sách chặt chẽ để tránh các khoản phạt tài chính từ hãng hàng không (ADM).",
+        job2Task4Tag: "Hành vi Người tiêu dùng & CRM:",
+        job2Task4Text: "Đóng vai trò điều phối viên cho các tranh chấp du lịch toàn cầu, quan sát các điểm nghẽn thực tế của khách hàng để phân tích trải nghiệm người dùng (UX) và tỷ lệ từ bỏ nền tảng.",
         footerText: "Được xây dựng bằng HTML, CSS & JS.",
         apiGreeting: "👋 Chào người bạn đến từ ",
         contactSectionTitle: "Liên Hệ",
@@ -134,6 +164,14 @@ function setLanguage(lang) {
         }
     });
 
+    // Also handle input placeholders if present
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[lang][key]) {
+            el.setAttribute('placeholder', translations[lang][key]);
+        }
+    });
+
     subtitleText = translations[lang]['subtitle'];
     const typewriterElement = document.getElementById('typewriter');
     if (typeIndex >= subtitleText.length || typeIndex === 0) {
@@ -153,6 +191,11 @@ langToggleBtn.addEventListener('click', () => {
     
     // Clear currency result on language switch to prevent mixed languages
     document.getElementById('currency-result').innerHTML = "---";
+
+    // GA4 Tracking
+    if (typeof gtag === 'function') {
+        gtag('event', 'language_switch', { 'selected_language': currentLang });
+    }
 });
 
 // ==========================================
@@ -175,7 +218,9 @@ async function convertCurrency() {
         return;
     }
 
-    // Show Loading state
+    // Disable button and Show Loading state
+    convertBtn.disabled = true;
+    convertBtn.style.opacity = '0.7';
     resultDisplay.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; 
 
     try {
@@ -192,9 +237,17 @@ async function convertCurrency() {
         const formattedResult = new Intl.NumberFormat(locale).format(convertedAmount);
 
         resultDisplay.innerHTML = `${formattedAmount} ${base} = <span style="color: var(--accent);">${formattedResult} ${target}</span>`;
+        
+        // GA4 Tracking
+        if (typeof gtag === 'function') {
+            gtag('event', 'currency_converted', { 'base': base, 'target': target });
+        }
     } catch (error) {
         console.error("Currency API Error:", error);
         resultDisplay.innerHTML = currentLang === 'en' ? "Error fetching rates. Please try again." : "Lỗi tải tỷ giá. Vui lòng thử lại.";
+    } finally {
+        convertBtn.disabled = false;
+        convertBtn.style.opacity = '1';
     }
 }
 
@@ -240,6 +293,11 @@ themeToggle.addEventListener('click', () => {
     htmlElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
     updateToggleIcon(newTheme);
+    
+    // GA4 Tracking
+    if (typeof gtag === 'function') {
+        gtag('event', 'theme_change', { 'selected_theme': newTheme });
+    }
 });
 
 function updateToggleIcon(theme) {
@@ -323,7 +381,7 @@ document.addEventListener('keydown', (e) => { if (e.key === "Escape") closeLight
 document.getElementById('certModal').addEventListener('click', function(e) { if (e.target === this) closeLightbox(); });
 
 // ==========================================
-// 9. PROJECT SLIDER
+// 9. PROJECT SLIDER WITH TOUCH SUPPORT
 // ==========================================
 const track = document.getElementById('project-slider');
 const slides = Array.from(track.children);
@@ -370,6 +428,32 @@ dotsList.forEach(dot => {
 track.addEventListener('mouseenter', stopSlider);
 track.addEventListener('mouseleave', startSlider);
 
+// Mobile Touch/Swipe Support
+let startX = 0;
+let endX = 0;
+
+track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    stopSlider();
+}, { passive: true });
+
+track.addEventListener('touchmove', (e) => {
+    endX = e.touches[0].clientX;
+}, { passive: true });
+
+track.addEventListener('touchend', () => {
+    if (startX > endX + 50) {
+        // Swiped left (Next slide)
+        slideCurrent = (slideCurrent + 1) % slides.length;
+        updateProjSlider();
+    } else if (startX < endX - 50) {
+        // Swiped right (Previous slide)
+        slideCurrent = (slideCurrent - 1 + slides.length) % slides.length;
+        updateProjSlider();
+    }
+    startSlider();
+});
+
 // ==========================================
 // INITIALIZATION ON LOAD
 // ==========================================
@@ -379,4 +463,3 @@ document.addEventListener('DOMContentLoaded', () => {
     startSlider();
     setTimeout(typeWriter, 500); 
 });
-
